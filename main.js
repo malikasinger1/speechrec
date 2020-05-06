@@ -2,6 +2,7 @@ class App {
   constructor () {
     window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
     this.recognition = new SpeechRecognition();
+    this.recognition.lang = "ar"
     this.synth = window.speechSynthesis;
     this.icon = document.querySelector('i.fa.fa-microphone');
     this.paragraph = document.createElement('p');
@@ -65,10 +66,12 @@ class App {
     this.recognition.onstart = function() {
       this.listening = true;
       console.log('Speech recognition service has started');
+      document.getElementById("message").innerText = 'Speech recognition service is Listening'
     };
     
     this.recognition.onend = function() {
       console.log('Speech recognition service disconnected');
+      document.getElementById("message").innerText = 'Stopped'
     };
   }
 
@@ -141,7 +144,7 @@ class App {
 
   getTime() {
     const time = new Date(Date.now());
-    return `the time is ${time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`
+    return `the time is ${time.toLocaleString('ar-SA', { hour: 'numeric', minute: 'numeric', hour12: true })}`
   }
 
   getDate() {
